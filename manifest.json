@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Habit Tracker",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Habit Tracker",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "description": "A simple habit tracker to build and maintain daily habits."
+}
