@@ -4,9 +4,9 @@
   "display": "standalone",
   "name": "Habit Tracker",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/Habit-tracker/",
   "short_name": "Habit Tracker",
-  "start_url": "/",
+  "start_url": "/Habit-tracker/",
   "theme_color": "#ffffff",
   "description": "A simple habit tracker to build and maintain daily habits."
 }
