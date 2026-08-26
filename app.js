@@ -35,4 +35,86 @@ function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",
 if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js");
 let deferred;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;document.getElementById("installBtn").classList.remove("hidden")});
 document.getElementById("installBtn").onclick=async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;document.getElementById("installBtn").classList.add("hidden")};
-render();
+// ===== GROWTH CALENDAR =====
+let growthMonth = new Date();
+
+function renderGrowthCalendar() {
+  const grid = document.getElementById("growthCalendar");
+  const title = document.getElementById("monthTitle");
+
+  if (!grid || !title) return;
+
+  const year = growthMonth.getFullYear();
+  const month = growthMonth.getMonth();
+
+  title.textContent = growthMonth.toLocaleDateString(undefined, {
+    month: "long",
+    year: "numeric"
+  });
+
+  grid.innerHTML = "";
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Empty cells before the 1st day
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement("div");
+    empty.className = "calendar-day empty";
+    grid.appendChild(empty);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dt = new Date(year, month, day);
+    const key = dateKey(dt);
+    const data = state.days[key] || {};
+
+    const total = state.habits.length;
+    const done = state.habits.filter(h => data[h.id]).length;
+
+    const percent = total
+      ? Math.round((done / total) * 100)
+      : 0;
+
+    let level = 0;
+
+    if (percent === 0) level = 0;
+    else if (percent < 25) level = 1;
+    else if (percent < 50) level = 2;
+    else if (percent < 75) level = 3;
+    else level = 4;
+
+    const cell = document.createElement("div");
+    cell.className = `calendar-day level${level}`;
+
+    cell.innerHTML = `
+      <span>${day}</span>
+      <small>${percent}%</small>
+    `;
+
+    cell.title = `${dt.toLocaleDateString()} — ${done}/${total} habits completed`;
+
+    grid.appendChild(cell);
+  }
+}
+
+// Previous month
+document.getElementById("prevMonth").onclick = () => {
+  growthMonth.setMonth(growthMonth.getMonth() - 1);
+  renderGrowthCalendar();
+};
+
+// Next month
+document.getElementById("nextMonth").onclick = () => {
+  growthMonth.setMonth(growthMonth.getMonth() + 1);
+  renderGrowthCalendar();
+};
+
+// Update calendar whenever the app renders
+const originalRender = render;
+render = function () {
+  originalRender();
+  renderGrowthCalendar();
+};
+
+renderGrowthCalendar();
