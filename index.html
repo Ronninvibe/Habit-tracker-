@@ -42,7 +42,41 @@
   <div class="sectionHead"><h3>7-day overview</h3></div>
   <div id="week"></div>
 </section>
+<section class="card">
+  <div class="sectionHead">
+    <h3>📅 Growth Calendar</h3>
+  </div>
 
+  <div class="growth-calendar">
+    <div class="calendar-title">
+      <button id="prevMonth">‹</button>
+      <b id="monthTitle"></b>
+      <button id="nextMonth">›</button>
+    </div>
+
+    <div class="calendar-weekdays">
+      <span>Sun</span>
+      <span>Mon</span>
+      <span>Tue</span>
+      <span>Wed</span>
+      <span>Thu</span>
+      <span>Fri</span>
+      <span>Sat</span>
+    </div>
+
+    <div id="growthCalendar" class="calendar-grid"></div>
+
+    <div class="calendar-legend">
+      <span>Less</span>
+      <i class="level0"></i>
+      <i class="level1"></i>
+      <i class="level2"></i>
+      <i class="level3"></i>
+      <i class="level4"></i>
+      <span>More</span>
+    </div>
+  </div>
+</section>
 <section class="card">
   <div class="sectionHead"><h3>Quick note</h3></div>
   <textarea id="note" placeholder="How did today go?"></textarea>
