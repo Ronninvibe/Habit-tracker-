@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.ronninvibe.twa",
+      "sha256_cert_fingerprints": [
+        "24:09:DC:56:3C:19:32:0E:5B:82:98:D6:0C:CE:D4:98:10:D7:4A:AF:E1:CB:FE:8B:C5:CF:7C:EE:DC:5A:7E:E7"
+      ]
+    }
+  }
+]
