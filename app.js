@@ -237,4 +237,5 @@ primaryNextBtn.onclick = () => {
   );
 
   alert("Primary area saved! 🎯");
+ primaryAreaScreen.classList.add("hidden");
 };
