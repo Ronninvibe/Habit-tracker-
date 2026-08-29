@@ -189,3 +189,50 @@ if (growthNextBtn) {
     alert("Growth areas saved! 🌱");
   };
 }
+// ===== V2 ONBOARDING: PRIMARY AREA SELECTION =====
+
+const primaryAreaScreen =
+  document.getElementById("primaryAreaScreen");
+
+const primaryAreaList =
+  document.getElementById("primaryAreaList");
+
+const primaryNextBtn =
+  document.getElementById("primaryNextBtn");
+
+function renderPrimaryAreas() {
+  const areas = JSON.parse(
+    localStorage.getItem("growthAreas") || "[]"
+  );
+
+  primaryAreaList.innerHTML = "";
+
+  areas.forEach((area) => {
+    const label = document.createElement("label");
+
+    label.innerHTML = `
+      <input type="radio" name="primaryArea" value="${area}">
+      ${area}
+    `;
+
+    primaryAreaList.appendChild(label);
+  });
+}
+
+primaryNextBtn.onclick = () => {
+  const selected = document.querySelector(
+    '#primaryAreaList input[name="primaryArea"]:checked'
+  );
+
+  if (!selected) {
+    alert("Please choose your primary area.");
+    return;
+  }
+
+  localStorage.setItem(
+    "primaryArea",
+    selected.value
+  );
+
+  alert("Primary area saved! 🎯");
+};
