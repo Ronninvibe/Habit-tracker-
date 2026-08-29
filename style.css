@@ -116,3 +116,6 @@
 .calendar-legend .level4{
   background:#8bb5ff;
 }
+.hidden {
+  display: none !important;
+}
