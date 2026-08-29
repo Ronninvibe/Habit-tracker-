@@ -118,3 +118,74 @@ render = function () {
 };
 
 renderGrowthCalendar();
+// ===== V2 ONBOARDING: LOGIN → GROWTH AREAS =====
+
+const authScreen = document.getElementById("authScreen");
+const usernameInput = document.getElementById("usernameInput");
+const loginBtn = document.getElementById("loginBtn");
+const growthAreaScreen = document.getElementById("growthAreaScreen");
+
+if (loginBtn) {
+  loginBtn.onclick = () => {
+    const name = usernameInput.value.trim();
+
+    if (!name) {
+      alert("Please enter your name.");
+      return;
+    }
+
+    localStorage.setItem("growthUserName", name);
+
+    authScreen.classList.add("hidden");
+    growthAreaScreen.classList.remove("hidden");
+  };
+}
+// ===== V2 ONBOARDING: GROWTH AREA SELECTION =====
+
+const growthNextBtn = document.getElementById("growthNextBtn");
+const selectedCount = document.getElementById("selectedCount");
+
+if (growthNextBtn) {
+  const areaCheckboxes = document.querySelectorAll(
+    '#growthAreaScreen input[type="checkbox"]'
+  );
+
+  areaCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      const selected = document.querySelectorAll(
+        '#growthAreaScreen input[type="checkbox"]:checked'
+      );
+
+      if (selected.length > 5) {
+        checkbox.checked = false;
+        alert("You can choose up to 5 growth areas.");
+      }
+
+      const count = document.querySelectorAll(
+        '#growthAreaScreen input[type="checkbox"]:checked'
+      ).length;
+
+      if (selectedCount) {
+        selectedCount.textContent = `${count}/5 selected`;
+      }
+    });
+  });
+
+  growthNextBtn.onclick = () => {
+    const selected = [...document.querySelectorAll(
+      '#growthAreaScreen input[type="checkbox"]:checked'
+    )].map((checkbox) => checkbox.value);
+
+    if (selected.length === 0) {
+      alert("Please choose at least one growth area.");
+      return;
+    }
+
+    localStorage.setItem(
+      "growthAreas",
+      JSON.stringify(selected)
+    );
+
+    alert("Growth areas saved! 🌱");
+  };
+}
