@@ -187,6 +187,8 @@ if (growthNextBtn) {
     );
 
     alert("Growth areas saved! 🌱");
+   primaryAreaScreen.classList.remove("hidden");
+renderPrimaryAreas();
   };
 }
 // ===== V2 ONBOARDING: PRIMARY AREA SELECTION =====
